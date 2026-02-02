@@ -1,0 +1,8 @@
+{
+  "name": "MaternalCare+",
+  "description": "Digital platform for maternal health in DRC, featuring e-partogram, prenatal tracking, and AI-powered obstetric alerts.",
+  "requestFramePermissions": [
+    "camera",
+    "microphone"
+  ]
+}
