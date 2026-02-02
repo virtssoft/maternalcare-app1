@@ -1,19 +1,19 @@
 
 import React, { useState } from 'react';
 import { HashRouter as Router, Routes, Route, Navigate } from 'react-router-dom';
-import Layout from './components/Layout';
-import Dashboard from './components/Dashboard';
-import CPNList from './components/CPNList';
-import PartogramView from './components/PartogramView';
-import AfyaBot from './components/AfyaBot';
-import ReferralSystem from './components/ReferralSystem';
-import Statistics from './components/Statistics';
-import VaccinationCalendar from './components/VaccinationCalendar';
-import RoleSelector from './components/RoleSelector';
-import Login from './components/Login';
-import CommunityPortal from './components/CommunityPortal';
-import JobRoleSelector from './components/JobRoleSelector';
-import { Role, JobRole, Province, HealthStructure } from './types';
+import Layout from './components/Layout.tsx';
+import Dashboard from './components/Dashboard.tsx';
+import CPNList from './components/CPNList.tsx';
+import PartogramView from './components/PartogramView.tsx';
+import AfyaBot from './components/AfyaBot.tsx';
+import ReferralSystem from './components/ReferralSystem.tsx';
+import Statistics from './components/Statistics.tsx';
+import VaccinationCalendar from './components/VaccinationCalendar.tsx';
+import RoleSelector from './components/RoleSelector.tsx';
+import Login from './components/Login.tsx';
+import CommunityPortal from './components/CommunityPortal.tsx';
+import JobRoleSelector from './components/JobRoleSelector.tsx';
+import { Role, JobRole, Province, HealthStructure } from './types.ts';
 
 const App: React.FC = () => {
   const [selectedRole, setSelectedRole] = useState<Role | null>(null);
@@ -67,7 +67,6 @@ const App: React.FC = () => {
     );
   }
 
-  // Mandatory Job Selection for Zone and Aire roles after authentication
   if ((selectedRole === Role.ZONE_DE_SANTE || selectedRole === Role.AIRE_DE_SANTE) && !jobRole) {
     return <JobRoleSelector onSelect={setJobRole} role={selectedRole} />;
   }

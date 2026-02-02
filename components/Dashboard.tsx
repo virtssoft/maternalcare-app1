@@ -8,8 +8,8 @@ import {
 import { 
   CartesianGrid, Tooltip, ResponsiveContainer, AreaChart, Area, XAxis, YAxis
 } from 'recharts';
-import { Role, JobRole, Patient } from '../types';
-import { db } from '../services/dbMock';
+import { Role, JobRole, Patient } from '../types.ts';
+import { db } from '../services/dbMock.ts';
 import { GoogleGenAI } from '@google/genai';
 
 const chartData = [
@@ -21,7 +21,6 @@ const Dashboard: React.FC<{ role: Role; jobRole?: JobRole | null }> = ({ role, j
   const isAuthority = role === Role.COMFORT_ASBL || role === Role.DPS;
   const [aiReport, setAiReport] = useState<string | null>(null);
   const [isGenerating, setIsGenerating] = useState(false);
-  const [showAddModal, setShowAddModal] = useState<string | null>(null);
   const [isExporting, setIsExporting] = useState(false);
   const [patientsCount, setPatientsCount] = useState(0);
 
@@ -30,6 +29,10 @@ const Dashboard: React.FC<{ role: Role; jobRole?: JobRole | null }> = ({ role, j
   }, []);
 
   const generateAIInsight = async () => {
+    if (!process.env.API_KEY) {
+      setAiReport("Clé API manquante. Impossible de générer l'analyse.");
+      return;
+    }
     setIsGenerating(true);
     try {
       const ai = new GoogleGenAI({ apiKey: process.env.API_KEY });
